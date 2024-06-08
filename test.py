@@ -1,62 +1,72 @@
 EVENTS = [["ma"],["la"]]
-ACTIONS = [["f","e","a"],["s","i"]]
+ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
 INVENTORY_FORMAT = "{}"
-equipped_items = ["cannnon","basic armor"]
-inventory_items = ["sword","knife","bow","gun"]
+equipped_items = [["cannnon",1],["basic armor",2]]
+inventory_items = [["sword",1],["mediam armor",2],["bow",1],["gun",1]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
-ITEM_CLASIFICATION = [1,2,1,1,1,1]
 
+def equip(index_value,i):
+    print("do you want to remove", equipped_items[index_value][0])
+    user = input("yes/no\n").lower()
+    if user == "yes" or user == "y":
+        inventory_items.append(equipped_items[index_value])
+        equipped_items.remove(equipped_items[index_value])
+        equipped_items.append(inventory_items[i])
+    elif user == "no" or user == "n":
+        print("ok")
+    else:
+        print("thats not a command")
 
+def print_inventory():
+    print("\nin inventory:")
+    for i in range(len(inventory_items)):
+        print(INVENTORY_FORMAT.format(inventory_items[i][0]))
+    print("\nequipped:")
+    for i in range(len(equipped_items)):
+        print(equipped_items[i][0])
 
 def story_loop():
     path = 0
     x=0
     y=0
     while True:
-        num = len(ACTIONS[path])
-
         print(EVENTS[path][x])
-        while y < num:
-            print(ACTIONS[path][y])
+        while y <= len(ACTIONS[path]):
+            print(ACTIONS[path][0][y])
             y+=1
-        user = input("i for innventory\n").lower()
+        user = input("which do you chose\ni for inventory\n").lower()
         if user == "i":
             inventory()
-            num = len(ACTIONS[path])
-
-            print(EVENTS[path][x])
-            while y < num:
-                print(ACTIONS[path][y])
-                y+=1
-        choise = input("\n")
-        if choise == "1":
-            path = 1
+            y=0
+        elif user in ACTIONS[path][0]:
+            for p in range(len(ACTIONS[path][0])):
+                if user == ACTIONS[path][0][p]:
+                    path = ACTIONS[path][1][p]
+        else:
+            print("thats not an action")
+            y=0
+           
 
 def inventory():
-    print("inn invenntory:")
-    for i in range(len(inventory_items)):
-        print(INVENTORY_FORMAT.format(inventory_items[i]))
-    print("\nEquipped:")
-    for i in range(len(equipped_items)):
-        print(equipped_items[i])       
+    print_inventory()     
     while True:
-        user = input("type (thing) to equip somthing    type exit to exit\n").lower()
+        user = input("\ntype (thing) to equip somthing    type exit to exit\n").lower()
         if user == "exit":
             return
                 
         for i in range(len(inventory_items)):
-            if user == inventory_items[i]:
-                user = input("what action do you want to proform?\n").lower()
+            if user == inventory_items[i][0]:
+                user = input("what action do you want to proform? (equip, cancel)\n").lower()
                 if user == "equip":
-                    equipped_items.append(inventory_items[i])
+                    if inventory_items[i][1]==equipped_items[0][1]:
+                        equip(0,i)
+                    elif inventory_items[i][1]==equipped_items[1][1]:
+                        equip(1,i)
+                    else:
+                        equipped_items.append(inventory_items[i])
                     inventory_items.remove(inventory_items[i])
-                    print("in inventory:")
-                    for i in range(len(inventory_items)):
-                        print(INVENTORY_FORMAT.format(inventory_items[i]))
-                    print("\nequipped:")
-                    for i in range(len(equipped_items)):
-                        print(equipped_items[i])
+                    print_inventory()
                     break
                 elif user == "cancel":
                     break
