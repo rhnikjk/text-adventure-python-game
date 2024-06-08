@@ -1,11 +1,13 @@
+import random
 EVENTS = [["ma"],["la"]]
 ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
 INVENTORY_FORMAT = "{}"
-equipped_items = [["cannnon",1,11],["basic armor",2,20]]
-inventory_items = [["sword",1,5],["mediam armor",2,25],["bow",1,7],["gun",1,10]]
+equipped_items = [["cannnon",1,11,0.7],["basic armor",2,20]]
+inventory_items = [["sword",1,5,1],["mediam armor",2,25],["bow",1,7,0.8],["gun",1,10,0.9]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
 ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
+ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
 
 #-----------------------FUNCTIONS--------------------------
 def story_loop():
@@ -30,14 +32,22 @@ def story_loop():
         else:
             print("thats not an action")
             y=0
-
+# they cann chose to fight or use items. if they fihgt that can select between a couple of differnnt attacks which have differnt chances to hit and differnt amount of damage if they get attacked by an enemy they lose helth
 def health():
     health = equipped_items[1][2]
 
 def combat(enemytype):
+    enemy_damage = 0
     print(enemytype, "attacks")
     user = input("Fight\nitems\nflee").lower
     if user == "fight":
+        print("you attack enemy with", equipped_items[0][0])
+        if random()>equipped_items[0][3]:
+            enemy_damage += equipped_items[0][2]
+            print(ATTACK_SUCSESS.format(equipped_items[0][2],ENEMYS[enemytype][0],ENEMYS[enemytype][1]-enemy_damage))
+        else:
+            print("attack missed :(")
+    elif user == "items":
         print("")
 
 #-------------------INVENTORY FUNCTIONS---------------------
