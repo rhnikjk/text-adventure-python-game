@@ -2,9 +2,10 @@ import random
 EVENTS = [["ma"],["la"]]
 ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
-INVENTORY_FORMAT = "{}"
-equipped_items = [["cannnon",1,11,0.7],["basic armor",2,20]]
-inventory_items = [["sword",1,5,1],["mediam armor",2,25],["bow",1,7,0.8],["gun",1,10,0.9]]
+ARMOR_FORMAT = "{}    type: {}   health points: {}"
+WEPON_FORMAT = "{}    type: {}   damage: {}   hit chance: {}"
+equipped_items = [["cannnon","wepon",11,0.5],["basic armor","armor",20]]
+inventory_items = [["sword","wepon",5,1],["mediam armor","armor",25],["bow","wepon",7,0.8],["gun","wepon",10,0.9]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
 ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
@@ -24,9 +25,9 @@ def story_loop():
             inventory()
             y=0
         elif user in ACTIONS[path][0]:
-            for p in range(len(ACTIONS[path][0])):
-                if user == ACTIONS[path][0][p]:
-                    path = ACTIONS[path][1][p]
+            for i in range(len(ACTIONS[path][0])):
+                if user == ACTIONS[path][0][i]:
+                    path = ACTIONS[path][1][i]
                     y=0
                     break
         else:
@@ -38,17 +39,23 @@ def health():
 
 def combat(enemytype):
     enemy_damage = 0
-    print(enemytype, "attacks")
-    user = input("Fight\nitems\nflee").lower
-    if user == "fight":
-        print("you attack enemy with", equipped_items[0][0])
-        if random()>equipped_items[0][3]:
-            enemy_damage += equipped_items[0][2]
-            print(ATTACK_SUCSESS.format(equipped_items[0][2],ENEMYS[enemytype][0],ENEMYS[enemytype][1]-enemy_damage))
+    print(ENEMYS[enemytype][0], "attacks")
+    while ENEMYS[enemytype][1]-enemy_damage > 0:
+        user = input("Fight\nitems\nflee\n").lower()
+        if user == "fight":
+            print("you attack enemy with", equipped_items[0][0])
+            if random.random()<equipped_items[0][3]:
+                enemy_damage += equipped_items[0][2]
+                if enemy_damage > ENEMYS[enemytype][1]:
+                    enemy_damage = ENEMYS[enemytype][1]
+                print(ATTACK_SUCSESS.format(equipped_items[0][2],ENEMYS[enemytype][0],ENEMYS[enemytype][1]-enemy_damage))
+            else:
+                print("attack missed :(")
+        elif user == "items":
+            print("item")
         else:
-            print("attack missed :(")
-    elif user == "items":
-        print("")
+            print("thats nnot an optionn")
+    print("battle over")
 
 #-------------------INVENTORY FUNCTIONS---------------------
 
@@ -93,12 +100,18 @@ def equip(index_value,i):
 def print_inventory():
     print("\nin inventory:")
     for i in range(len(inventory_items)):
-        print(INVENTORY_FORMAT.format(inventory_items[i][0]))
+        if inventory_items[i][1] == "wepon":
+            print(WEPON_FORMAT.format(inventory_items[i][0],inventory_items[i][1],inventory_items[i][2],inventory_items[i][3]))
+        elif inventory_items[i][1] == "armor":
+            print(ARMOR_FORMAT.format(inventory_items[i][0],inventory_items[i][1],inventory_items[i][2]))
     print("\nequipped:")
     for i in range(len(equipped_items)):
-        print(equipped_items[i][0])
-
+        if equipped_items[i][1] == "wepon":
+            print(WEPON_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2],equipped_items[i][3]))
+        elif equipped_items[i][1] == "armor":
+            print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
 
 
 
 story_loop()
+combat(1)
