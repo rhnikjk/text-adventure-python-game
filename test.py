@@ -31,8 +31,8 @@ def story_loop():
     x=0
     y=0
     while True:
-        print(EVENTS[path][x])
-        while y <= len(ACTIONS[path]):
+        print("\n",EVENTS[path][x])
+        while y < len(ACTIONS[path][0]):
             print(ACTIONS[path][0][y])
             y+=1
         user = input("which do you chose\ni for inventory\n").lower()
@@ -43,6 +43,8 @@ def story_loop():
             for p in range(len(ACTIONS[path][0])):
                 if user == ACTIONS[path][0][p]:
                     path = ACTIONS[path][1][p]
+                    y=0
+                    break
         else:
             print("thats not an action")
             y=0
