@@ -4,11 +4,13 @@ ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
 ARMOR_FORMAT = "{}    type: {}   health points: {}"
 WEPON_FORMAT = "{}    type: {}   damage: {}   hit chance: {}"
-equipped_items = [["cannnon","wepon",11,0.5],["basic armor","armor",20]]
+equipped_items = [["cannnon","wepon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["sword","wepon",5,1],["mediam armor","armor",25],["bow","wepon",7,0.8],["gun","wepon",10,0.9]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
 ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
+ENEMY_ATTACK = "{} attacks you. it hits.\n your health: {}\n"
+damage_taken = 0
 
 #-----------------------FUNCTIONS--------------------------
 def story_loop():
@@ -34,13 +36,15 @@ def story_loop():
             print("thats not an action")
             y=0
 # they cann chose to fight or use items. if they fihgt that can select between a couple of differnnt attacks which have differnt chances to hit and differnt amount of damage if they get attacked by an enemy they lose helth
-def health():
-    health = equipped_items[1][2]
+def health(damagetaken):
+    health = equipped_items[1][2] - damagetaken
+    return health
 
 def combat(enemytype):
     enemy_damage = 0
+    damagetaken = damage_taken
     print(ENEMYS[enemytype][0], "attacks")
-    while ENEMYS[enemytype][1]-enemy_damage > 0:
+    while ENEMYS[enemytype][1]-enemy_damage > 0 and health(damagetaken) > 0:
         user = input("Fight\nitems\nflee\n").lower()
         if user == "fight":
             print("you attack enemy with", equipped_items[0][0])
@@ -52,10 +56,17 @@ def combat(enemytype):
             else:
                 print("attack missed :(")
         elif user == "items":
-            print("item")
+            inventory()
         else:
             print("thats nnot an optionn")
+        if ENEMYS[enemytype][1]-enemy_damage > 0:
+            if random.random()<0.8:
+                damagetaken += ENEMYS[enemytype][2]
+                print(ENEMY_ATTACK.format(ENEMYS[enemytype][0],health(damagetaken)))
+            else:
+                print("enemy attacks. it missed")
     print("battle over")
+    return damagetaken
 
 #-------------------INVENTORY FUNCTIONS---------------------
 
@@ -74,8 +85,6 @@ def inventory():
                         equip(0,i)
                     elif inventory_items[i][1]==equipped_items[1][1]:
                         equip(1,i)
-                    else:
-                        equipped_items.append(inventory_items[i])
                     inventory_items.remove(inventory_items[i])
                     print_inventory()
                     break
@@ -91,7 +100,7 @@ def equip(index_value,i):
     if user == "yes" or user == "y":
         inventory_items.append(equipped_items[index_value])
         equipped_items.remove(equipped_items[index_value])
-        equipped_items.append(inventory_items[i])
+        equipped_items.insert(index_value,inventory_items[i])
     elif user == "no" or user == "n":
         print("ok")
     else:
@@ -113,5 +122,7 @@ def print_inventory():
 
 
 
-story_loop()
-combat(1)
+
+damage_taken += combat(1)
+damage_taken += combat(1)
+print(damage_taken)
