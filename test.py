@@ -123,6 +123,5 @@ def print_inventory():
 
 
 
-damage_taken += combat(1)
-damage_taken += combat(1)
-print(damage_taken)
+combat(1)
+
