@@ -4,6 +4,7 @@ ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
 ARMOR_FORMAT = "{}    type: {}   health points: {}"
 WEPON_FORMAT = "{}    type: {}   damage: {}   hit chance: {}"
+#the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["cannnon","wepon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["sword","wepon",5,1],["mediam armor","armor",25],["bow","wepon",7,0.8],["gun","wepon",10,0.9]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
@@ -61,7 +62,7 @@ def story_loop():
         else:
             print("thats not an action")
             y=0
-# they cann chose to fight or use items. if they fihgt that can select between a couple of differnnt attacks which have differnt chances to hit and differnt amount of damage if they get attacked by an enemy they lose helth
+
 def health(damagetaken):
     health = equipped_items[1][2] - damagetaken
     return health
