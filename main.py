@@ -152,5 +152,5 @@ def print_inventory():
 
 
 
-combat(1)
+story_loop()
 
