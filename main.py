@@ -1,4 +1,5 @@
 import random
+#VARIBLES/CONSTANTS
 EVENTS = [["ma"],["la"]]
 ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
@@ -12,6 +13,7 @@ ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n your health: {}\n"
 damage_taken = 0
+
 
 #TODO:
 #PUT COMBAT IN STORY LOOP WITH SCRIPTED/RANDOM TIMINGS
@@ -150,5 +152,5 @@ def print_inventory():
 
 
 
-combat(1)
+story_loop()
 
