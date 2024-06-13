@@ -39,6 +39,7 @@ damage_taken = 0
 #ADD MAIN CODE
 #DO DEVELOPEMENNT SECTIONS
 #MAKE SURE TO TAKE SCREENSHOTS
+#todo list (charlie is doing it)
 
 
 #-----------------------FUNCTIONS--------------------------
