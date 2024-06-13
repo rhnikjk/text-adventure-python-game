@@ -39,6 +39,7 @@ damage_taken = 0
 #ADD MAIN CODE
 #DO DEVELOPEMENNT SECTIONS
 #MAKE SURE TO TAKE SCREENSHOTS
+#todo list (charlie is doing it)
 
 
 #-----------------------FUNCTIONS--------------------------
@@ -112,9 +113,10 @@ def inventory():
                 if user == "equip":
                     if inventory_items[i][1]==equipped_items[0][1]:
                         equip(0,i)
+                        inventory_items.remove(inventory_items[i])
                     elif inventory_items[i][1]==equipped_items[1][1]:
                         equip(1,i)
-                    inventory_items.remove(inventory_items[i])
+                        inventory_items.remove(inventory_items[i])
                     print_inventory()
                     break
                 elif user == "cancel":
@@ -152,5 +154,5 @@ def print_inventory():
 
 
 
-story_loop()
+combat(1)
 
