@@ -1,8 +1,8 @@
 import random
 #VARIBLES/CONSTANTS
-EVENTS = [["ma"],["la"]]
-ACTIONS = [[["f","e","a"],[0,1,1]],[["s","i"], [0,1]]]
 CONSIQUENCES = []
+STORY_EVENTS = [["mark whips it out",1],["you also whip it out",2],["you get hung",3]]
+ACTIONS = [[["give the zuck",3],["run away",3],["unzip",2]]]
 ARMOR_FORMAT = "{}    type: {}   health points: {}"
 WEPON_FORMAT = "{}    type: {}   damage: {}   hit chance: {}"
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
@@ -44,27 +44,12 @@ damage_taken = 0
 
 #-----------------------FUNCTIONS--------------------------
 def story_loop():
-    path = 0
-    x=0
-    y=0
-    while True:
-        print("\n",EVENTS[path][x])
-        while y < len(ACTIONS[path][0]):
-            print(ACTIONS[path][0][y])
-            y+=1
-        user = input("which do you chose\ni for inventory\n").lower()
-        if user == "i":
-            inventory()
-            y=0
-        elif user in ACTIONS[path][0]:
-            for i in range(len(ACTIONS[path][0])):
-                if user == ACTIONS[path][0][i]:
-                    path = ACTIONS[path][1][i]
-                    y=0
-                    break
-        else:
-            print("thats not an action")
-            y=0
+    for x in range(len(STORY_EVENTS)):
+        print(STORY_EVENTS[x][0])
+        for i in range(len(ACTIONS[x])):
+            print(ACTIONS[x][i][0])
+
+
 
 def health(damagetaken):
     health = equipped_items[1][2] - damagetaken
@@ -154,5 +139,5 @@ def print_inventory():
 
 
 
-combat(1)
+story_loop()
 
