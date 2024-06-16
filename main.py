@@ -63,8 +63,8 @@ def story_loop():
     while True:
         print(STORY_EVENTS[path][x])
         for i in range(len(ACTIONS[path][x])):
-            print(ACTIONS[path][x][i][0])
-        user = input("\033[22mwhich do you chose?\n\033[1mi\033[22m for inventory\n").lower()
+            print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
+        user = input("\033[22mwhich do you chose?\n\033[33mi\033[0m for inventory\n").lower()
         for i in range(len(ACTIONS[path][x])):
             if user == ACTIONS[path][x][i][0]:
                 path = ACTIONS[path][x][i][1]
@@ -89,7 +89,7 @@ def combat(enemytype):
     enemy_damage = 0
     print(ENEMYS[enemytype][0], "attacks")
     while ENEMYS[enemytype][1]-enemy_damage > 0 and health(damage_taken[0]) > 0:
-        user = input("Fight\nitems\nflee\n").lower()
+        user = input("\033[33mFight\nitems(i)\nflee\n\033[0m").lower()
         while True:
             if user == "fight":
                 print("you attack enemy with", equipped_items[0][0])
@@ -101,7 +101,7 @@ def combat(enemytype):
                 else:
                     print("attack missed :(")
                 break
-            elif user == "items":
+            elif user == "items" or user == "item" or user ==  "i":
                 inventory()
                 break
             elif user == "flee":
@@ -123,13 +123,13 @@ def combat(enemytype):
 def inventory():
     print_inventory()     
     while True:
-        user = input("\ntype (thing) to equip somthing    type exit to exit\n").lower()
+        user = input("\ntype (\033[1mthing\033[0m) to equip somthing    type \033[33mexit\033[0m to exit\n").lower()
         if user == "exit":
             return
                 
         for i in range(len(inventory_items)):
             if user == inventory_items[i][0]:
-                user = input("what action do you want to proform? (use, cancel)\n").lower()
+                user = input("what action do you want to proform? (\033[33muse, cancel\033[0m)\n").lower()
                 if user == "use":
                     if inventory_items[i][1]==equipped_items[0][1]:
                         equip(0,i)
@@ -151,7 +151,7 @@ def inventory():
 
 def equip(index_value,i):
     print("do you want to swap for", equipped_items[index_value][0])
-    user = input("yes/no\n").lower()
+    user = input("\033[33myes/no\033[0m\n").lower()
     if user == "yes" or user == "y":
         inventory_items.append(equipped_items[index_value])
         equipped_items.remove(equipped_items[index_value])
