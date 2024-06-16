@@ -6,7 +6,7 @@ ACTIONS = [[[["act1",0],["act2",1]],[["this is path0",1]]],[[["act3",0],["act4",
 ARMOR_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   health points: {}\033[23m"
 WEAPON_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   damage: {}   hit chance: {}\033[23m"
 CONSUMABLE_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   heals: {}\033[23m"
-
+cowardice = [0]
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["cannon","weapon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["food","consumable",10],["sword","weapon",5,1],["medium armor","armor",25],["bow","weapon",7,0.8],["gun","weapon",10,0.9],["stick","weapon",1,1]]
@@ -56,7 +56,8 @@ def intro():
 
 def story_loop():
     #this whole block is very confusing, this is what it means: 'path' is the story path the event and actions are on, 'x' is how far down the path you are, 'i' counts up all the actions, and the 0 is so it prints only the text.
-    # ask robert bofore modifying any related code
+    #if it helps you can think of it like a coordinate system with the 'path's being on one axis and the 'x' on the other.
+    #ask robert bofore modifying any related code
     path = 0
     x=0
     while True:
@@ -74,20 +75,14 @@ def story_loop():
                 break
             elif user == "i":
                 inventory()
+                break
             else:
                 print("that is not an option")
                 
             
-            
-            
-        
 
-            
-
-
-
-def health(damagetaken):
-    health = equipped_items[1][2] - damagetaken
+def health():
+    health = equipped_items[1][2] - damage_taken[0]
     return health
 
 def combat(enemytype):
@@ -109,12 +104,15 @@ def combat(enemytype):
             elif user == "items":
                 inventory()
                 break
+            elif user == "flee":
+                print("you flee, like a coward. you will regret this later")
+                cowardice[0] += 1
             else:
                 print("thats not an option")
         if ENEMYS[enemytype][1]-enemy_damage > 0:
             if random.random()<0.8:
                 damage_taken[0] += ENEMYS[enemytype][2]
-                print(ENEMY_ATTACK.format(ENEMYS[enemytype][0],health(damage_taken[0])))
+                print(ENEMY_ATTACK.format(ENEMYS[enemytype][0],health()))
             else:
                 print("enemy attacks. it missed")
     print("battle over")
@@ -141,6 +139,8 @@ def inventory():
                     else:
                         damage_taken[0] -= inventory_items[i][2]
                         inventory_items.remove(inventory_items[i])
+                        if damage_taken[0] < 0:
+                            damage_taken[0] = 0
                     print_inventory()
                     break
                 elif user == "cancel":
@@ -179,5 +179,5 @@ def print_inventory():
 
 
 
-combat(2)
+story_loop()
 
