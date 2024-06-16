@@ -2,7 +2,7 @@ import random
 #VARIBLES/CONSTANTS
 CONSIQUENCES = []
 STORY_EVENTS = [["mark whips it out",1],["you also whip it out",2],["you get hung",3]]
-ACTIONS = [[["give the zuck",3],["run away",3],["unzip",2]]]
+ACTIONS = [[["\033[1mgive the zuck",3],["\033[1mrun away",3],["\033[1munzip",2]]]
 ARMOR_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   health points: {}\033[23m"
 WEAPON_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   damage: {}   hit chance: {}\033[23m"
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
@@ -48,6 +48,11 @@ def story_loop():
         print(STORY_EVENTS[x][0])
         for i in range(len(ACTIONS[x])):
             print(ACTIONS[x][i][0])
+        user = input("which do you chose")
+        for i in range(len(ACTIONS[x])):
+            if user == ACTIONS[x][i][0]:
+                path = ACTIONS[x][i][1]
+            
 
 
 
@@ -139,5 +144,4 @@ def print_inventory():
 
 
 
-damage_taken=combat(1)
-combat(2)
+story_loop()
