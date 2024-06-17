@@ -1,6 +1,6 @@
 import random
 #VARIBLES/CONSTANTS
-CONSIQUENCES = []
+CONSEQUENCES = []
 STORY_EVENTS = [["mark whips it out","sigma","as","flip"],["racist","as","fella"]]
 ACTIONS = [[[["act1",0],["act2",1]],[["this is path0",1]]],[[["act3",0],["act4",0],["act5",1]],[["this is path 1",0]]]]
 ARMOR_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   health points: {}\033[23m"
@@ -11,8 +11,8 @@ cowardice = [0]
 equipped_items = [["cannon","weapon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["food","consumable",10],["sword","weapon",5,1],["medium armor","armor",25],["bow","weapon",7,0.8],["gun","weapon",10,0.9],["stick","weapon",1,1]]
 ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
-ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
-ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
+ENEMIES = [["scout",10,3],["warrior",15,5],["tank",25,4]]
+ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
 
@@ -55,29 +55,35 @@ def intro():
             print("8 lister street")
 
 def story_loop():
-    #this whole block is very confusing, this is what it means: 'path' is the story path the event and actions are on, 'x' is how far down the path you are, 'i' counts up all the actions, and the 0 is so it prints only the text.
-    #if it helps you can think of it like a coordinate system with the 'path's being on one axis and the 'x' on the other.
+    
     #ask robert bofore modifying any related code
+    #path is the story path the event and actions are on
     path = 0
+    # x is how far down the path you are
     x=0
     while True:
         print(STORY_EVENTS[path][x])
+        #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
+            # i counts up all the actions, and the 0 is so it prints only the text
             print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
         user = input("\033[22mwhich do you chose?\n\033[33mi\033[0m for inventory\n").lower()
         for i in range(len(ACTIONS[path][x])):
             if user == ACTIONS[path][x][i][0]:
                 path = ACTIONS[path][x][i][1]
+                # if the value of the action you do matches the path you are taking, it moves you forward with the path and if it doesn't match then it resets to 0 as you are taking a new path
                 if ACTIONS[path][x][i][1] == path:
                     x+=1
                 else:
                     x=0
                 break
+            # if the user types "i" then it stops and opens the inventory
             elif user == "i":
                 inventory()
                 break
             else:
                 print("that is not an option")
+            #if it helps you can think of it like a coordinate system with the 'path's being on one axis and the 'x' on the other.
                 
             
 
@@ -87,17 +93,17 @@ def health():
 
 def combat(enemytype):
     enemy_damage = 0
-    print(ENEMYS[enemytype][0], "attacks")
-    while ENEMYS[enemytype][1]-enemy_damage > 0 and health(damage_taken[0]) > 0:
+    print(ENEMIES[enemytype][0], "attacks")
+    while ENEMIES[enemytype][1]-enemy_damage > 0 and health(damage_taken[0]) > 0:
         user = input("\033[33mFight\nitems(i)\nflee\n\033[0m").lower()
         while True:
             if user == "fight":
                 print("you attack enemy with", equipped_items[0][0])
                 if random.random()<equipped_items[0][3]:
                     enemy_damage += equipped_items[0][2]
-                    if enemy_damage > ENEMYS[enemytype][1]:
-                        enemy_damage = ENEMYS[enemytype][1]
-                    print(ATTACK_SUCSESS.format(equipped_items[0][2],ENEMYS[enemytype][0],ENEMYS[enemytype][1]-enemy_damage))
+                    if enemy_damage > ENEMIES[enemytype][1]:
+                        enemy_damage = ENEMIES[enemytype][1]
+                    print(ATTACK_SUCCESS.format(equipped_items[0][2],ENEMIES[enemytype][0],ENEMIES[enemytype][1]-enemy_damage))
                 else:
                     print("attack missed :(")
                 break
@@ -109,10 +115,10 @@ def combat(enemytype):
                 cowardice[0] += 1
             else:
                 print("thats not an option")
-        if ENEMYS[enemytype][1]-enemy_damage > 0:
+        if ENEMIES[enemytype][1]-enemy_damage > 0:
             if random.random()<0.8:
-                damage_taken[0] += ENEMYS[enemytype][2]
-                print(ENEMY_ATTACK.format(ENEMYS[enemytype][0],health()))
+                damage_taken[0] += ENEMIES[enemytype][2]
+                print(ENEMY_ATTACK.format(ENEMIES[enemytype][0],health()))
             else:
                 print("enemy attacks. it missed")
     print("battle over")
