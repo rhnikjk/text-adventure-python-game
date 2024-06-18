@@ -52,7 +52,7 @@ def intro():
             print ("lets jump into it")
             break
         else:
-            print("8 lister street")
+            print("your not funny for typing this")
 
 def story_loop():
     #this whole block is very confusing, this is what it means: 'path' is the story path the event and actions are on, 'x' is how far down the path you are, 'i' counts up all the actions, and the 0 is so it prints only the text.
