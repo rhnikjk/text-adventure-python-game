@@ -2,7 +2,7 @@ import random
 #VARIBLES/CONSTANTS
 CONSIQUENCES = []
 STORY_EVENTS = [["mark whips it out","sigma","as","flip"],["racist","as","fella"]]
-ACTIONS = [[[["act1",0],["act2",1]],[["this is path0",1]]],[[["act3",0],["act4",0],["act5",1]],[["this is path 1",0]]]]
+ACTIONS = [[[["act1",0],["act2",1]],[["this is path0",1]]],[[["act3",0],["act4",0],["act5",1]],[["this is path 1",0],["sigga",1]]]]
 ARMOR_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   health points: {}\033[23m"
 WEAPON_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   damage: {}   hit chance: {}\033[23m"
 CONSUMABLE_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   heals: {}\033[23m"
@@ -15,7 +15,7 @@ ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
-
+checkpoint = [0,0]
 
 #TODO:
 #PUT COMBAT IN STORY LOOP WITH SCRIPTED/RANDOM TIMINGS
@@ -61,6 +61,16 @@ def story_loop():
     path = 0
     x=0
     while True:
+    
+        if health() <1:
+            path = checkpoint[0]
+            x = checkpoint[1]
+            damage_taken[0] = 0
+        
+        if path == 0 and x == 1:
+            createcheckpoint(path,x)
+        if path == 1 and x == 2:
+            combat(2)
         print(STORY_EVENTS[path][x])
         for i in range(len(ACTIONS[path][x])):
             print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
@@ -78,9 +88,17 @@ def story_loop():
                 break
             else:
                 print("that is not an option")
+
+
+
+def createcheckpoint(path, x):
+    print("Checkpoint Saved")
+    checkpoint[0]=path
+    checkpoint[1]=x
+
+
                 
             
-
 def health():
     health = equipped_items[1][2] - damage_taken[0]
     return health
@@ -88,7 +106,7 @@ def health():
 def combat(enemytype):
     enemy_damage = 0
     print(ENEMYS[enemytype][0], "attacks")
-    while ENEMYS[enemytype][1]-enemy_damage > 0 and health(damage_taken[0]) > 0:
+    while ENEMYS[enemytype][1]-enemy_damage > 0 and health() > 0:
         user = input("\033[33mFight\nitems(i)\nflee\n\033[0m").lower()
         while True:
             if user == "fight":
