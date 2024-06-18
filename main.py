@@ -76,10 +76,14 @@ def story_loop():
             elif user == "i":
                 inventory()
                 break
-            else:
-                print("that is not an option")
+            print("that is not an option")
                 
-            
+def scripted_event():
+    #someone needs to make this
+    print(".")
+
+def boss_battle():
+    print(".")
 
 def health():
     health = equipped_items[1][2] - damage_taken[0]
