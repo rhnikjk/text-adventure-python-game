@@ -10,13 +10,14 @@ cowardice = [0]
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["cannon","weapon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["food","consumable",10],["sword","weapon",5,1],["medium armor","armor",25],["bow","weapon",7,0.8],["gun","weapon",10,0.9],["stick","weapon",1,1]]
-ALL_ITEMS = ["cannon", "basic armor", "sword", "knife", "bow", "gun"]
+ALL_ITEMS = [["saussage doge", "consumable", 50],["flying squid", "consumable", 35]]
 ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
 checkpoint = [0,0]
-
+PET_OPTIONS = ["Saussage Doge","Flying Squid"]
+PETS =[0,1]
 #TODO:
 #PUT COMBAT IN STORY LOOP WITH SCRIPTED/RANDOM TIMINGS
 #ADD CHECKPOINTS
@@ -53,6 +54,14 @@ def intro():
             break
         else:
             print("8 lister street")
+def pet():
+    ramdom = random.choice(PETS)
+    pet = PET_OPTIONS[ramdom]
+    inventory_items.append(ALL_ITEMS[ramdom])
+    print("You take",pet,"on your adventure")
+    namepet=input("What would you like to name your companion\n")
+    print("your pet is now named",namepet,"you love it very much")
+
 
 def story_loop():
     #this whole block is very confusing, this is what it means: 'path' is the story path the event and actions are on, 'x' is how far down the path you are, 'i' counts up all the actions, and the 0 is so it prints only the text.
@@ -197,5 +206,6 @@ def print_inventory():
 
 
 
-story_loop()
+pet()
+inventory()
 
