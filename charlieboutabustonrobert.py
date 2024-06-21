@@ -1,5 +1,5 @@
 def intro():
-    input("whats your name" )
+    input("whats your name\n" )
     print("I noticed you made a spelling mistake but fair not I can see you were writing Robat :D")
     ready = input( "welcome Robat to ---- Are you ready to play? yes or no\n")
     while True:
@@ -7,7 +7,7 @@ def intro():
             print ("lets jump into it")
             break
         else:
-            print("8 lister street")
+            print("Your not funny for typing this")
         
         
 
