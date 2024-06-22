@@ -157,14 +157,20 @@ def scripted_event(path, x):
         if path == SCRIPTED_EVENTS[0][counter][0] and x == SCRIPTED_EVENTS[0][counter][1]:
             if SCRIPTED_EVENTS[1][counter][0] == "combat":
                 combat(SCRIPTED_EVENTS[1][counter][1])
+
             elif SCRIPTED_EVENTS[1][counter][0] == "item":
-                print("NEW ITEMS AQUIRED i for inventoy")
+                print("\033[33mNEW ITEMS AQUIRED i for inventoy\033[0m")
                 item_group = SCRIPTED_EVENTS[1][counter][1]
                 for i in range(len(ALL_ITEMS[item_group])):
                     inventory_items.append(ALL_ITEMS[item_group][i])
+
             elif SCRIPTED_EVENTS[1][counter][0] == "combat/reset":
                 combat(SCRIPTED_EVENTS[1][counter][1])
+                SCRIPTED_EVENTS[1].remove(SCRIPTED_EVENTS[1][counter])
+                SCRIPTED_EVENTS[0].remove(SCRIPTED_EVENTS[0][counter])
                 return 0
+            SCRIPTED_EVENTS[1].remove(SCRIPTED_EVENTS[1][counter])
+            SCRIPTED_EVENTS[0].remove(SCRIPTED_EVENTS[0][counter])
             return x
         else:
             errors += 1
@@ -230,6 +236,7 @@ def inventory():
                         inventory_items.remove(inventory_items[i])
                     elif inventory_items[i][1]==equipped_items[1][1]:
                         equip(1,i)
+                        inventory_items.remove(inventory_items[i])
                     else:
                         damage_taken[0] -= inventory_items[i][2]
                         inventory_items.remove(inventory_items[i])
@@ -247,6 +254,7 @@ def equip(index_value,i):
     print("do you want to swap for", equipped_items[index_value][0])
     user = input("\033[33myes/no\033[0m\n").lower()
     if user == "yes" or user == "y":
+        
         inventory_items.append(equipped_items[index_value])
         equipped_items.remove(equipped_items[index_value])
         equipped_items.insert(index_value,inventory_items[i])
