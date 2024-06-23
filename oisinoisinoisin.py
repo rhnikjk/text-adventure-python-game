@@ -32,7 +32,7 @@ STORY_EVENTS = [#main forest storyline path = 0
                   #flee from boss path = 9
                  ["you run from the boss and return to the village. a coward. the villagers relise you are not the hero they hoped you would be. \nTHE END\n\033[1mdo you want to play again?\033[0m"],
                  #dont save the villagers but win the game path = 10
-                 ["you grab the engine part and return to your ship. you take a long time to repair it and by the time you do the boss has regained power. the villagers are going extinct and will soon be wiped out.\nTHE END\n\033[1mdo you want to play again?\033[0m"]
+                 ["you grab the engine part and return to your ship. you take a long time to repair it and by the time you do the boss has regained power. the villagers are going extinct and will soon be wiped out.\nTHE END\n\033[1mdo you want to play again?\033[0m"],
                  #coward ending path 11
                  ["you search the planet for a while and then relise the leader the villagers were talking about has your engine part. do you go and fight him?",
                   "you start walking to the boss\nFinally, you reach a clearing and you can see a giant rose bush clung to the wall it must be the size of a football field seaming to defy graffiti as it sits on the cliff. Suddenly the ground starts to shake as the tendrils of the bush break free of the wall each vine covered in viciously sharp spikes. What must be hundreds of them reach out for you each of them like a deadly whip. You are quickly entangled in the arms of the creature. You wiggle around and manage to break free.\n do you attack the boss or flee",
@@ -41,7 +41,7 @@ STORY_EVENTS = [#main forest storyline path = 0
                  ]
                 #path,x
                 #combat
-SCRIPTED_EVENTS = [[[5,0],[2,0],[2,1],[2,3],[6,0],[6,1],[7,0],[7,1],
+SCRIPTED_EVENTS = [[[5,0],[2,0],[2,1],[2,3],[6,0],[6,1],[7,0],[7,2],
                    #item pickup
                    [0,2],[2,2]],
                    #what happens
@@ -59,7 +59,7 @@ ACTIONS = [[[["forest path",0],["cliff path",1]],[["yes",0],["no",2]],[["sleep",
            #attacking plant mini boss path = 5
            [[["head",6],["stem",7]]],
            #attacking miniboss head path = 6
-           [[["keep attacking",6],["attack stem",7]]],
+           [[["keep attacking",6],["attack stem",7]],[["keep attacking",6],["attack stem",7]]],
            #attacking miniboss stem path = 7
            [[["keep attacking",7],["attack head",6]],[["attack boss",7],["flee",9]],[["finish it",7],["go for the engine part",10]],[["yes",0],["no",100]]],
            #unused code that will be too annoying to delete path = 8
@@ -78,7 +78,7 @@ cowardice = [0]
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["stick","weapon",3,0.8],["broken armor","armor",15]]
 inventory_items = [["food","consumable",10]]
-ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",5,1],["food","consumable",10],["food","consumable",10]],
+ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",5,1],["potion","consumable",35],["food","consumable",10]],
              [["heavy armor","armor",35],["mace","weapon",8,0.7],["food","consumable",10],["food","consumable",10]]]
 #ememy type - health - damage
 ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["centipede",30,5]]
@@ -140,6 +140,7 @@ def story_loop():
             print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
         user = input("\033[22mwhich do you chose?\n\033[33mi\033[0m for inventory\n").lower()
         for i in range(len(ACTIONS[path][x])):
+            print(path,x)
             if user == ACTIONS[path][x][i][0]:
                 # if the value of the action you do matches the path you are taking, it moves you forward with the path and if it doesn't match then it resets to 0 as you are taking a new path
                 if ACTIONS[path][x][i][1] == path:
