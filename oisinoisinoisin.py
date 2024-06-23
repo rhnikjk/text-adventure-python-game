@@ -3,7 +3,7 @@ import random
 CONSEQUENCES = []
 STORY_EVENTS = [#main forest storyline path = 0
                  ["You crash land on a planet that is covered in forest and does not show many signs of life. you open your eyes and look around, you are on a cliff overlooking a vast expanse of valleys and hills. You check the damages on your spaceship and see that  there is an engine part missing. Looking closer you can make out the silhouettes of buildings, many of which are crumbling and abandoned. You stand up and look around. There are two paths leading down from the cliff. One path looks simple leading through a forest before coming out far below the other path is steep and jagged leading straight down. What path do you choose?",
-                 "You start descending down the path towards the forest; the path is wide and slightly overgrown. Small pink bugs fly around you as you start descending into the forest, as you enter the forest everything seems quiet the bugs have gone. Looking around you, you can see large tubular plants among the trees. You reach out to touch one but as you do it suddenly moves in a long sweeping motion you roll out of the way narrowly missing you, as it swings past you can see that the large stem is covered in spikes that seem to be leaking a dark reddish substance which sizzles as it hits the ground.\nyou look off into the distance you see a spire of smoke, you start walking towards it not sure of what you might find. As you near the source of the smoke, you are shocked to see people walking around a crumbling village. You stand up and start walking towards the people. One of them approaches you cautiously holding something. It is a small wooden vial of a purple liquid gesturing to their heart then to the ground. you take the potion. The villager talks about how two years ago an asteroid crashed into the planet wiping out many of the population and with it came the plants. The leader is unknown but you must stop him. We have become far too weak and we are barely able to survive here, let alone travel. You must go. Would you like to accept this quest?",
+                 "You start descending down the path towards the forest; the path is wide and slightly overgrown. \nyou look off into the distance you see a spire of smoke, you start walking towards it not sure of what you might find. As you near the source of the smoke, you are shocked to see people walking around a crumbling village. You stand up and start walking towards the people. one of them approaches you. The villager talks about how two years ago an asteroid crashed into the planet wiping out many of the population and with it came the plants. The leader is unknown but you must stop him. We have become far too weak and we are barely able to survive here, let alone travel. You must go. Would you like to accept this quest?",
                  "You decide to accept the quest the villagers cheer. one of them comes forward with a new set of armour. you gratefully take it, thanking the villager you pull off your armour and put on the new one. It is heavy but much better than a broken one. You thank the villagers and start walking in the direction of the boss.\nyou come along a good place to sleep and its getting late. do you rest?",
                  "you wake up and get attacked by a swarm of bugs. do you fight them?"],
                  #main cliff storyline path = 1
@@ -26,14 +26,18 @@ STORY_EVENTS = [#main forest storyline path = 0
                  ["you attack the stem and corrosive sap spurts out doing 2 damage. do you keep attacking the stem or go for the head",
                   "you stand above the lifeless body of the plant. one more challenge ahead. you keep walking towards the boss...\nFinally, you reach a clearing and you can see a giant rose bush clung to the wall it must be the size of a football field seaming to defy graffiti as it sits on the cliff. Suddenly the ground starts to shake as the tendrils of the bush break free of the wall each vine covered in viciously sharp spikes. What must be hundreds of them reach out for you each of them like a deadly whip. You are quickly entangled in the arms of the creature. You wiggle around and manage to break free.\n do you attack the boss or flee",
                   "the boss is weakened. its movements are slow. you see the engine part behind behind where it was standing. do you finish the boss and save the villagers?",
-                  "you kill the boss and save the villagers. you go back to the village and the villagers cheer. they help you rebuild your ship and you leave the planet.\nTHE END\n\n"],
+                  "you kill the boss and save the villagers. you go back to the village and the villagers cheer. they help you rebuild your ship and you leave the planet.\nTHE END\n\033[1mdo you want to play again?\033[0m"],
                  #killed the plant fighting boss path = 8
-                 ["you stand above the lifeless body of the plant. one more challenge ahead. you keep walking towards the boss...\nFinally, you reach a clearing and you can see a giant rose bush clung to the wall it must be the size of a football field seaming to defy graffiti as it sits on the cliff. Suddenly the ground starts to shake as the tendrils of the bush break free of the wall each vine covered in viciously sharp spikes. What must be hundreds of them reach out for you each of them like a deadly whip. You are quickly entangled in the arms of the creature. You wiggle around and manage to break free.\n do you attack the boss or flee",
-                  "the boss is weakened. its movements are slow. you see the engine part behind behind where it was standing. do you finish the boss and save the villagers?","you kill the boss and save the villagers. you go back to the village and the villagers cheer. they help you rebuild your ship and you leave the planet.\nTHE END\n\n"],
+                 ["you are stranded on the planet for the rest of your life. alone.\nTHE END\n\033[1mdo you want to play again?\033[0m"],
                   #flee from boss path = 9
-                 ["you run from the boss and return to the village. a coward. the villagers relise you are not the hero they hoped you would be. \nTHE END\n\n"],
+                 ["you run from the boss and return to the village. a coward. the villagers relise you are not the hero they hoped you would be. \nTHE END\n\033[1mdo you want to play again?\033[0m"],
                  #dont save the villagers but win the game path = 10
-                 ["you grab the engine part and return to your ship. you take a long time to repair it and by the time you do the boss has regained power. the villagers are going extinct and will soon be wiped out.\nTHE END\n\n"]
+                 ["you grab the engine part and return to your ship. you take a long time to repair it and by the time you do the boss has regained power. the villagers are going extinct and will soon be wiped out.\nTHE END\n\033[1mdo you want to play again?\033[0m"]
+                 #coward ending path 11
+                 ["you search the planet for a while and then relise the leader the villagers were talking about has your engine part. do you go and fight him?",
+                  "you start walking to the boss\nFinally, you reach a clearing and you can see a giant rose bush clung to the wall it must be the size of a football field seaming to defy graffiti as it sits on the cliff. Suddenly the ground starts to shake as the tendrils of the bush break free of the wall each vine covered in viciously sharp spikes. What must be hundreds of them reach out for you each of them like a deadly whip. You are quickly entangled in the arms of the creature. You wiggle around and manage to break free.\n do you attack the boss or flee",
+                  "the boss is weakened. its movements are slow. you see the engine part behind behind where it was standing. do you finish the boss and save the villagers?",
+                  "you kill the boss and save the villagers. you go back to the village and the villagers cheer. they help you rebuild your ship and you leave the planet.\nTHE END\n\033[1mdo you want to play again?\033[0m"]
                  ]
                 #path,x
                 #combat
@@ -47,19 +51,25 @@ ACTIONS = [[[["forest path",0],["cliff path",1]],[["yes",0],["no",2]],[["sleep",
            #cliff path path = 1
            [[["act3",0],["act4",0],["act5",1]],[["this is path 1",0]]],
            #evil path path = 2
-           [[["yes", 2],["no",6]],[["kill them all",2],["let them be",6]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
+           [[["yes", 2],["no",11]],[["kill them all",2],["let them be",6]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
            #dieing on evil path path = 3
            [[["ok",0]]],
-           #dieing on sleep bugs
+           #dieing on sleep bugs path =4
            [[["ok",0]]],
-           #attacking plant mini boss path = 4
+           #attacking plant mini boss path = 5
            [[["head",6],["stem",7]]],
-           #attacking miniboss head path = 5
+           #attacking miniboss head path = 6
            [[["keep attacking",6],["attack stem",7]]],
-           #attacking miniboss stem path = 6
-           [[["keep attacking",7],["attack head",6]]],
-           #kill plant attack boss path = 7
-           [[["attack boss",7],["flee",9]],[["finish it",8],["go for the engine part",10]]],
+           #attacking miniboss stem path = 7
+           [[["keep attacking",7],["attack head",6]],[["attack boss",7],["flee",9]],[["finish it",7],["go for the engine part",10]],[["yes",0],["no",100]]],
+           #unused code that will be too annoying to delete path = 8
+           [[["yes",0],["no",100]]],
+           #coward ending path = 9
+           [[["yes",0],["no",100]]],
+           #dont save villagers path = 10
+           [[["yes",0],["no",100]]],
+           #coward boss ending path = 11
+           [[["yes",11],["no",8]],[["attack",11],["flee",9]],[["finish it",11],["go for the engine part",10]],[["yes",0],["no",100]]]
            ]
 ARMOR_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   health points: {}\033[23m"
 WEAPON_FORMAT = "\033[1m{}    \033[22m\033[3mtype: {}   damage: {}   hit chance: {}\033[23m"
