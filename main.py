@@ -149,12 +149,9 @@ def print_inventory():
 
 
 
-<<<<<<< HEAD
 intro()
 story_loop()
 
-=======
 
 damage_taken=combat(1)
 combat(2)
->>>>>>> 70fa7b9f077aa605929065e8287b43ab4c8f7c4c

@@ -7,7 +7,7 @@ def intro():
             print ("lets jump into it")
             break
         else:
-            print("8 lister street")
+            print("your not funny for pressing this")
         
         
 
