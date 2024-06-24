@@ -1,4 +1,5 @@
 import random
+
 #VARIBLES/CONSTANTS
 CONSEQUENCES = []
 STORY_EVENTS = [#main forest storyline path = 0
@@ -312,18 +313,16 @@ def print_inventory():
         elif equipped_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 8ef332989bbdea65bd95fcfc340e957575bd25eb
+
+
+
 intro()
 pet()
 story_loop()
 
-<<<<<<< HEAD
+
 
 damage_taken=combat(1)
 combat(2)
-=======
->>>>>>> 8ef332989bbdea65bd95fcfc340e957575bd25eb
