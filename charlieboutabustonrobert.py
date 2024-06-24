@@ -7,7 +7,11 @@ def intro():
             print ("lets jump into it")
             break
         else:
+<<<<<<< HEAD
+            print("your not funny for pressing this")
+=======
             print("Your not funny for typing this")
+>>>>>>> 8ef332989bbdea65bd95fcfc340e957575bd25eb
         
         
 

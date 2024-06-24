@@ -1,5 +1,6 @@
 import random
-#VARIABLES/CONSTANTS
+
+#VARIaBLES/CONSTANTS
 CONSEQUENCES = []
 STORY_EVENTS = [#main forest storyline path = 0
                  ["You crash land on a planet that is covered in forest and does not show many signs of life. you open your eyes and look around, you are on a cliff overlooking a vast expanse of valleys and hills. You check the damages on your spaceship and see that  there is an engine part missing. Looking closer you can make out the silhouettes of buildings, many of which are crumbling and abandoned. You stand up and look around. There are two paths leading down from the cliff. One path looks simple leading through a forest before coming out far below the other path is steep and jagged leading straight down. What path do you choose?",
@@ -312,7 +313,16 @@ def print_inventory():
         elif equipped_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
 
+
+
+
+
+
 intro()
 pet()
 story_loop()
 
+
+
+damage_taken=combat(1)
+combat(2)
