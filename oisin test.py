@@ -86,8 +86,6 @@ ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
-checkpoint = []
-CHECKPOINTS = [[2,0],[7,1],[11,0]]
 PET_OPTIONS = ["Saussage Doge","Flying Squid"]
 PETS =[0,1]
 #TODO:
@@ -127,15 +125,6 @@ def intro():
         else:
             print("your not funny for typing this")
 
-def createcheckpoint(path, x):
-    for i in range(len(CHECKPOINTS)):
-            if path == CHECKPOINTS[i][0] and x == CHECKPOINTS[i][1]:
-                checkpoint.clear()
-                checkpoint.insert(0,CHECKPOINTS[i][0])
-                checkpoint.insert(1,CHECKPOINTS[i][1])
-                CHECKPOINTS.remove(CHECKPOINTS[i][0])
-                CHECKPOINTS.remove(CHECKPOINTS[i][1])
-
 def pet():
     ramdom = random.choice(PETS)
     pet = PET_OPTIONS[ramdom]
@@ -152,7 +141,6 @@ def story_loop():
     # x is how far down the path you are
     x=0
     while True:
-        createcheckpoint(path,x)
         not_option = 0 
         print(STORY_EVENTS[path][x])
         #prints out available actions for path
