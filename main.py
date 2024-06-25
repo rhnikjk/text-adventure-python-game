@@ -321,8 +321,3 @@ def print_inventory():
 intro()
 pet()
 story_loop()
-
-
-
-damage_taken=combat(1)
-combat(2)
