@@ -115,9 +115,10 @@ PETS =[0,1]
 #todo list (charlie is doing it)
 
 
+
 #-----------------------FUNCTIONS--------------------------
 def intro():
-    input("whats your name" )
+    input("Whats your name\n" )
     print("I noticed you made a spelling mistake but fair not I can see you were writing Robat :D")
     ready = input( "welcome Robat to ---- Are you ready to play? yes or no\n")
     while True:
@@ -136,6 +137,7 @@ def createcheckpoint(path, x):
                 CHECKPOINTS.remove(CHECKPOINTS[i][0])
                 CHECKPOINTS.remove(CHECKPOINTS[i][1])
 
+
 def pet():
     ramdom = random.choice(PETS)
     pet = PET_OPTIONS[ramdom]
@@ -153,7 +155,7 @@ def story_loop():
     x=0
     while True:
         createcheckpoint(path,x)
-        not_option = 0 
+        not_option = 0       
         print(STORY_EVENTS[path][x])
         #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
@@ -312,18 +314,12 @@ def print_inventory():
         elif equipped_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 8ef332989bbdea65bd95fcfc340e957575bd25eb
 intro()
 pet()
 story_loop()
 
-<<<<<<< HEAD
 
 damage_taken=combat(1)
 combat(2)
-=======
->>>>>>> 8ef332989bbdea65bd95fcfc340e957575bd25eb

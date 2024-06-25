@@ -15,7 +15,7 @@ cowardice = [0]
 equipped_items = [["cannon","weapon",15,0.5],["basic armor","armor",20]]
 inventory_items = [["food","consumable",10],["sword","weapon",5,1],["medium armor","armor",25],["bow","weapon",7,0.8],["gun","weapon",10,0.9],["stick","weapon",1,1]]
 ALL_ITEMS = [["saussage doge", "consumable", 50],["flying squid", "consumable", 35]]
-ENEMYS = [["scout",10,3],["warrior",15,5],["tank",25,4]]
+ENEMIES = [["scout",10,3],["warrior",15,5],["tank",25,4]]
 ATTACK_SUCSESS = "attack sucsessful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
@@ -68,6 +68,8 @@ def pet():
     print("your pet is now named",namepet,"you love it very much")
 
 
+
+
 def story_loop():
     
     #ask robert bofore modifying any related code
@@ -77,7 +79,9 @@ def story_loop():
     x=0
     while True:
         createcheckpoint(path, x)
-        print(STORY_EVENTS[path][x])
+        import textwrap
+        text = (STORY_EVENTS[path][x])
+        wrapped_text = textwrap.fill(text, width=40)
         #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
             # i counts up all the actions, and the 0 is so it prints only the text
@@ -113,7 +117,7 @@ def createcheckpoint(path, x):
 
                 
             
-            print("that is not an option")
+            print("That is not an option")
                 
 def scripted_event():
     #someone needs to make this
@@ -128,8 +132,8 @@ def health():
 
 def combat(enemytype):
     enemy_damage = 0
-    print(ENEMYS[enemytype][0], "attacks")
-    while ENEMYS[enemytype][1]-enemy_damage > 0 and health() > 0:
+    print(ENEMIES[enemytype][0], "attacks")
+    while ENEMIES[enemytype][1]-enemy_damage > 0 and health() > 0:
         user = input("\033[33mFight\nitems(i)\nflee\n\033[0m").lower()
         while True:
             if user == "fight":
@@ -138,7 +142,7 @@ def combat(enemytype):
                     enemy_damage += equipped_items[0][2]
                     if enemy_damage > ENEMIES[enemytype][1]:
                         enemy_damage = ENEMIES[enemytype][1]
-                    print(ATTACK_SUCCESS.format(equipped_items[0][2],ENEMIES[enemytype][0],ENEMIES[enemytype][1]-enemy_damage))
+                    print(ATTACK_SUCSESS.format(equipped_items[0][2],ENEMIES[enemytype][0],ENEMIES[enemytype][1]-enemy_damage))
                 else:
                     print("attack missed :(")
                 break
