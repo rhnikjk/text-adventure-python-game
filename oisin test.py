@@ -179,7 +179,7 @@ def scripted_event(path, x):
                 combat(SCRIPTED_EVENTS[1][counter][1])
 
             elif SCRIPTED_EVENTS[1][counter][0] == "item":
-                print("\033[33mNEW ITEMS AQUIRED i for inventoy\033[0m")
+                print("\033[33mNEW ITEMS AQUIRED i for inventory\033[0m")
                 item_group = SCRIPTED_EVENTS[1][counter][1]
                 for i in range(len(ALL_ITEMS[item_group])):
                     inventory_items.append(ALL_ITEMS[item_group][i])
