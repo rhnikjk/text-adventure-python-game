@@ -1,6 +1,5 @@
 import random
-
-#VARIaBLES/CONSTANTS
+#VARIABLES/CONSTANTS
 CONSEQUENCES = []
 STORY_EVENTS = [#main forest storyline path = 0
                  ["You crash land on a planet that is covered in forest and does not show many signs of life. you open your eyes and look around, you are on a cliff overlooking a vast expanse of valleys and hills. You check the damages on your spaceship and see that  there is an engine part missing. Looking closer you can make out the silhouettes of buildings, many of which are crumbling and abandoned. You stand up and look around. There are two paths leading down from the cliff. One path looks simple leading through a forest before coming out far below the other path is steep and jagged leading straight down. What path do you choose?",
@@ -87,8 +86,6 @@ ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
-checkpoint = []
-CHECKPOINTS = [[2,0],[7,1],[11,0]]
 PET_OPTIONS = ["Saussage Doge","Flying Squid"]
 PETS =[0,1]
 #TODO:
@@ -116,10 +113,9 @@ PETS =[0,1]
 #todo list (charlie is doing it)
 
 
-
 #-----------------------FUNCTIONS--------------------------
 def intro():
-    input("Whats your name\n" )
+    input("whats your name " )
     print("I noticed you made a spelling mistake but fair not I can see you were writing Robat :D")
     ready = input( "welcome Robat to ---- Are you ready to play? yes or no\n")
     while True:
@@ -128,16 +124,6 @@ def intro():
             break
         else:
             print("your not funny for typing this")
-
-def createcheckpoint(path, x):
-    for i in range(len(CHECKPOINTS)):
-            if path == CHECKPOINTS[i][0] and x == CHECKPOINTS[i][1]:
-                checkpoint.clear()
-                checkpoint.insert(0,CHECKPOINTS[i][0])
-                checkpoint.insert(1,CHECKPOINTS[i][1])
-                CHECKPOINTS.remove(CHECKPOINTS[i][0])
-                CHECKPOINTS.remove(CHECKPOINTS[i][1])
-
 
 def pet():
     ramdom = random.choice(PETS)
@@ -155,8 +141,7 @@ def story_loop():
     # x is how far down the path you are
     x=0
     while True:
-        createcheckpoint(path,x)
-        not_option = 0       
+        not_option = 0 
         print(STORY_EVENTS[path][x])
         #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
@@ -315,12 +300,7 @@ def print_inventory():
         elif equipped_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
 
-
-
 intro()
 pet()
 story_loop()
 
-
-damage_taken=combat(1)
-combat(2)
