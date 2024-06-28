@@ -156,6 +156,9 @@ def story_loop():
     x=0
     while True:
         createcheckpoint(path,x)
+        if health()<1:
+            path = checkpoint[0]
+            x = checkpoint[1]
         not_option = 0       
         print(STORY_EVENTS[path][x])
         #prints out available actions for path
@@ -164,7 +167,6 @@ def story_loop():
             print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
         user = input("\033[22mwhich do you chose?\n\033[33mi\033[0m for inventory\n").lower()
         for i in range(len(ACTIONS[path][x])):
-            print(path,x)
             if user == ACTIONS[path][x][i][0]:
                 # if the value of the action you do matches the path you are taking, it moves you forward with the path and if it doesn't match then it resets to 0 as you are taking a new path
                 if ACTIONS[path][x][i][1] == path:
@@ -248,6 +250,7 @@ def combat(enemytype):
             if random.random()<0.8:
                 damage_taken[0] += ENEMIES[enemytype][2]
                 print(ENEMY_ATTACK.format(ENEMIES[enemytype][0],health()))
+                
             else:
                 print("enemy attacks. it missed")
     print("battle over")
