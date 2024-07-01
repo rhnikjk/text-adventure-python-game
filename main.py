@@ -1,4 +1,9 @@
 import random
+import textwrap
+import shutil
+import sys
+import time
+
 
 #VARIaBLES/CONSTANTS
 CONSEQUENCES = []
@@ -157,7 +162,11 @@ def story_loop():
     while True:
         createcheckpoint(path,x)
         not_option = 0       
-        print(STORY_EVENTS[path][x])
+        for char in (textwrap.fill(STORY_EVENTS[path][x],width=shutil.get_terminal_size().columns)):
+            sys.stdout.write(char)
+            sys.stdout.flush()
+            time.sleep(0.01)
+        print()
         #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
             # i counts up all the actions, and the 0 is so it prints only the text
