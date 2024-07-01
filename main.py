@@ -135,8 +135,6 @@ def createcheckpoint(path, x):
                 checkpoint.clear()
                 checkpoint.insert(0,CHECKPOINTS[i][0])
                 checkpoint.insert(1,CHECKPOINTS[i][1])
-                CHECKPOINTS.remove(CHECKPOINTS[i][0])
-                CHECKPOINTS.remove(CHECKPOINTS[i][1])
 
 
 def pet():
@@ -278,7 +276,7 @@ def inventory():
                     else:
                         damage_taken[0] -= inventory_items[i][2]
                         inventory_items.remove(inventory_items[i])
-                        print(health())
+                        print("\n\033[1m\033[31myour health:",health(),("\n\033[0m"))
                         if damage_taken[0] < 0:
                             damage_taken[0] = 0
                     print_inventory()
