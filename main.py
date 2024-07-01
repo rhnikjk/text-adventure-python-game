@@ -47,7 +47,7 @@ STORY_EVENTS = [#main forest storyline path = 0
                  ]
                 #path,x
                 #combat
-SCRIPTED_EVENTS = [[[5,0],[2,0],[2,1],[2,3],[6,0],[6,1],[7,0],[7,2],
+SCRIPTED_EVENTS = [[[5,0],[2,1],[2,2],[2,3],[6,0],[6,1],[7,0],[7,2],
                    #item pickup
                    [0,2],[2,2]],
                    #what happens
@@ -168,7 +168,7 @@ def story_loop():
         for char in (textwrap.fill(STORY_EVENTS[path][x],width=shutil.get_terminal_size().columns)):
             sys.stdout.write(char)
             sys.stdout.flush()
-            time.sleep(0.01)
+            time.sleep(0.003)
         print()
         #prints out available actions for path
         for i in range(len(ACTIONS[path][x])):
@@ -318,7 +318,7 @@ def print_inventory():
             print(WEAPON_FORMAT.format(inventory_items[i][0],inventory_items[i][1],inventory_items[i][2],inventory_items[i][3]))
         elif inventory_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(inventory_items[i][0],inventory_items[i][1],inventory_items[i][2]))
-        elif inventory_items[i][1] == "consumable":
+        else:
             print(CONSUMABLE_FORMAT.format(inventory_items[i][0],inventory_items[i][1],inventory_items[i][2]))
     print("\n\033[4mequipped:\033[24m")
     for i in range(len(equipped_items)):
