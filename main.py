@@ -79,11 +79,11 @@ cowardice = [0]
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["stick","weapon",3,0.8],["broken armor","armor",15]]
 inventory_items = [["food","consumable",10]]
-ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",5,1],["potion","consumable",35],["food","consumable",10]],
+ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",8,0.7],["potion","consumable",35],["food","consumable",10]],
              [["heavy armor","armor",35],["mace","weapon",8,0.7],["food","consumable",10],["food","consumable",10]],
              [["saussage doge", "pet", 50],["flying squid", "pet", 35]]]
 #ememy type - health - damage
-ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["centipede",30,5]]
+ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
@@ -135,6 +135,7 @@ def createcheckpoint(path, x):
                 checkpoint.clear()
                 checkpoint.insert(0,CHECKPOINTS[i][0])
                 checkpoint.insert(1,CHECKPOINTS[i][1])
+                print("checkpoint saved")
 
 
 def pet():
@@ -157,6 +158,7 @@ def story_loop():
         if health()<1:
             path = checkpoint[0]
             x = checkpoint[1]
+            damage_taken[0] += 10
         not_option = 0       
         print(STORY_EVENTS[path][x])
         #prints out available actions for path
@@ -276,9 +278,9 @@ def inventory():
                     else:
                         damage_taken[0] -= inventory_items[i][2]
                         inventory_items.remove(inventory_items[i])
-                        print("\n\033[1m\033[31myour health:",health(),("\n\033[0m"))
                         if damage_taken[0] < 0:
                             damage_taken[0] = 0
+                        print("\n\033[1m\033[31myour health:",health(),("\n\033[0m"))
                     print_inventory()
                     break
                 elif user == "cancel":
