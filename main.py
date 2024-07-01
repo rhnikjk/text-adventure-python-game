@@ -84,11 +84,11 @@ cowardice = [0]
 #the numbers in the items list are: first number = damage/health points, second = chance to hit 
 equipped_items = [["stick","weapon",3,0.8],["broken armor","armor",15]]
 inventory_items = [["food","consumable",10]]
-ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",5,1],["potion","consumable",35],["food","consumable",10]],
+ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",8,0.7],["potion","consumable",35],["food","consumable",10]],
              [["heavy armor","armor",35],["mace","weapon",8,0.7],["food","consumable",10],["food","consumable",10]],
              [["saussage doge", "pet", 50],["flying squid", "pet", 35]]]
 #ememy type - health - damage
-ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["centipede",30,5]]
+ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
@@ -140,8 +140,7 @@ def createcheckpoint(path, x):
                 checkpoint.clear()
                 checkpoint.insert(0,CHECKPOINTS[i][0])
                 checkpoint.insert(1,CHECKPOINTS[i][1])
-                CHECKPOINTS.remove(CHECKPOINTS[i][0])
-                CHECKPOINTS.remove(CHECKPOINTS[i][1])
+                print("checkpoint saved")
 
 
 def pet():
@@ -161,6 +160,10 @@ def story_loop():
     x=0
     while True:
         createcheckpoint(path,x)
+        if health()<1:
+            path = checkpoint[0]
+            x = checkpoint[1]
+            damage_taken[0] += 10
         not_option = 0       
         for char in (textwrap.fill(STORY_EVENTS[path][x],width=shutil.get_terminal_size().columns)):
             sys.stdout.write(char)
@@ -173,7 +176,6 @@ def story_loop():
             print("\033[33m",ACTIONS[path][x][i][0],"\033[0m")
         user = input("\033[22mwhich do you chose?\n\033[33mi\033[0m for inventory\n").lower()
         for i in range(len(ACTIONS[path][x])):
-            print(path,x)
             if user == ACTIONS[path][x][i][0]:
                 # if the value of the action you do matches the path you are taking, it moves you forward with the path and if it doesn't match then it resets to 0 as you are taking a new path
                 if ACTIONS[path][x][i][1] == path:
@@ -257,6 +259,7 @@ def combat(enemytype):
             if random.random()<0.8:
                 damage_taken[0] += ENEMIES[enemytype][2]
                 print(ENEMY_ATTACK.format(ENEMIES[enemytype][0],health()))
+                
             else:
                 print("enemy attacks. it missed")
     print("battle over")
@@ -284,9 +287,9 @@ def inventory():
                     else:
                         damage_taken[0] -= inventory_items[i][2]
                         inventory_items.remove(inventory_items[i])
-                        print(health())
                         if damage_taken[0] < 0:
                             damage_taken[0] = 0
+                        print("\n\033[1m\033[31myour health:",health(),("\n\033[0m"))
                     print_inventory()
                     break
                 elif user == "cancel":
@@ -329,7 +332,3 @@ def print_inventory():
 intro()
 pet()
 story_loop()
-
-
-damage_taken=combat(1)
-combat(2)
