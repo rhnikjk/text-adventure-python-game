@@ -299,7 +299,7 @@ def print_inventory():
             print(WEAPON_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2],equipped_items[i][3]))
         elif equipped_items[i][1] == "armor":
             print(ARMOR_FORMAT.format(equipped_items[i][0],equipped_items[i][1],equipped_items[i][2]))
-
+#------------------------MAIN CODE--------------------------------------------------------
 intro()
 pet()
 story_loop()

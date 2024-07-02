@@ -49,15 +49,15 @@ STORY_EVENTS = [#main forest storyline path = 0
                 #combat
 SCRIPTED_EVENTS = [[[5,0],[2,1],[2,2],[2,3],[6,0],[6,1],[7,0],[7,2],
                    #item pickup
-                   [0,2],[2,2]],
+                   [0,2],[2,2],[11,2]],
                    #what happens
-                   [["combat",2],["combat",0],["combat",1],["combat",1],["combat",3],["combat/reset",3],["combat",4],["combat",5],["item",0],["item",1]]]
+                   [["combat",2],["combat",0],["combat",1],["combat",1],["combat",3],["combat/reset",3],["combat",4],["combat",5],["item",0],["item",1],["combat",5]]]
             #forest path untill boss path = 0
 ACTIONS = [[[["forest path",0]],[["yes",0],["no",2]],[["sleep",0],["continue",4]],[["yes",5],["no",4]]],
            #cliff path path = 1
            [[["act3",0],["act4",0],["act5",1]],[["this is path 1",0]]],
            #evil path path = 2
-           [[["yes", 2],["no",11]],[["kill them all",2],["let them be",6]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
+           [[["yes", 2],["no",11]],[["kill them all",2],["let them be",11]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
            #dieing on evil path path = 3
            [[["ok",0]]],
            #dieing on sleep bugs path =4
@@ -88,7 +88,7 @@ ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",8,0.7],["potion","co
              [["heavy armor","armor",35],["mace","weapon",8,0.7],["food","consumable",10],["food","consumable",10]],
              [["saussage doge", "pet", 50],["flying squid", "pet", 35]]]
 #ememy type - health - damage
-ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
+ENEMIES = [["villager",5,1],["vliiage",12,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
@@ -163,7 +163,7 @@ def story_loop():
         if health()<1:
             path = checkpoint[0]
             x = checkpoint[1]
-            damage_taken[0] += 10
+            damage_taken[0] = 0
         not_option = 0       
         for char in (textwrap.fill(STORY_EVENTS[path][x],width=shutil.get_terminal_size().columns)):
             sys.stdout.write(char)
