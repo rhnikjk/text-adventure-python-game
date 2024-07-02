@@ -49,9 +49,9 @@ STORY_EVENTS = [#main forest storyline path = 0
                 #combat
 SCRIPTED_EVENTS = [[[5,0],[2,1],[2,2],[2,3],[6,0],[6,1],[7,0],[7,2],
                    #item pickup
-                   [0,2],[2,2]],
+                   [0,2],[2,2],[11,2]],
                    #what happens
-                   [["combat",2],["combat",0],["combat",1],["combat",1],["combat",3],["combat/reset",3],["combat",4],["combat",5],["item",0],["item",1]]]
+                   [["combat",2],["combat",0],["combat",1],["combat",1],["combat",3],["combat/reset",3],["combat",4],["combat",5],["item",0],["item",1],["combat",5]]]
             #forest path untill boss path = 0
 ACTIONS = [[[["forest path",0]],[["yes",0],["no",2]],[["sleep",0],["continue",4]],[["yes",5],["no",4]]],
            #cliff path path = 1
