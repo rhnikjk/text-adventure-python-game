@@ -88,7 +88,7 @@ ALL_ITEMS = [[["medium armor","armor",25],["sword","weapon",8,0.7],["potion","co
              [["heavy armor","armor",35],["mace","weapon",8,0.7],["food","consumable",10],["food","consumable",10]],
              [["saussage doge", "pet", 50],["flying squid", "pet", 35]]]
 #ememy type - health - damage
-ENEMIES = [["villager",5,1],["vliiage",15,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
+ENEMIES = [["villager",5,1],["vliiage",12,7],["bugs",7,3],["head",15,8],["stem",12,5],["boss",30,5]]
 ATTACK_SUCCESS = "attack successful, you did {} damage\nenemy {} is on {} health"
 ENEMY_ATTACK = "{} attacks you. it hits.\n\033[1m\033[31myour health: {}\n\033[0m"
 damage_taken = [0]
@@ -163,7 +163,7 @@ def story_loop():
         if health()<1:
             path = checkpoint[0]
             x = checkpoint[1]
-            damage_taken[0] += 10
+            damage_taken[0] = 0
         not_option = 0       
         for char in (textwrap.fill(STORY_EVENTS[path][x],width=shutil.get_terminal_size().columns)):
             sys.stdout.write(char)
