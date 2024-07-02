@@ -57,7 +57,7 @@ ACTIONS = [[[["forest path",0]],[["yes",0],["no",2]],[["sleep",0],["continue",4]
            #cliff path path = 1
            [[["act3",0],["act4",0],["act5",1]],[["this is path 1",0]]],
            #evil path path = 2
-           [[["yes", 2],["no",11]],[["kill them all",2],["let them be",6]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
+           [[["yes", 2],["no",11]],[["kill them all",2],["let them be",11]],[["yes",2],["no",0]],[["yes",2],["no",3]],[["yes",0],["no",100]]],
            #dieing on evil path path = 3
            [[["ok",0]]],
            #dieing on sleep bugs path =4
